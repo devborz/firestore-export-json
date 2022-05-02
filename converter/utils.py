@@ -21,11 +21,13 @@ def get_dest_dict(key, json_tree):
         json_tree2 = get_dest_dict(key.parent(), json_tree)
         kind = key.kind()
         id_or_name = key.id_or_name()
-        if kind not in json_tree2:
-            json_tree2[kind] = {}
-        if id_or_name not in json_tree2[kind]:
-            json_tree2[kind][id_or_name] = {}
-        return json_tree2[kind][id_or_name]
+        if "__collections__" not in json_tree2:
+            json_tree2["__collections__"] = {}
+        if kind not in json_tree2["__collections__"]:
+            json_tree2["__collections__"][kind] = {}
+        if id_or_name not in json_tree2["__collections__"][kind]:
+            json_tree2["__collections__"][kind][id_or_name] = {}
+        return json_tree2["__collections__"][kind][id_or_name]
 
 
 def get_value(value: Dict, raw=False):

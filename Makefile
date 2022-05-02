@@ -4,7 +4,7 @@ SHELL=/bin/bash
 VENV_NAME?=venv
 VENV_BIN=$(shell pwd)/${VENV_NAME}/bin
 
-PYTHON=${VENV_BIN}/python
+PYTHON=${VENV_BIN}/python3
 
 .DEFAULT: help
 
@@ -16,7 +16,7 @@ help:
 
 venv: $(VENV_NAME)/bin/activate
 $(VENV_NAME)/bin/activate: setup.py
-	test -d $(VENV_NAME) || python -m venv $(VENV_NAME)
+	test -d $(VENV_NAME) || python3 -m venv $(VENV_NAME)
 	touch $(VENV_NAME)/bin/activate
 	${PYTHON} -m pip install -U pip setuptools
 	${PYTHON} -m pip install -e .

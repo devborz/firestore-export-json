@@ -20,6 +20,8 @@ num_files_processed: Value = Value("i", 0)
 
 
 def main(args=None):
+    args = ['/Users/usmanturkaev/Desktop/from/2022-05-01T04:58:27_86653/all_namespaces/all_kinds/',
+            '/Users/usmanturkaev/Desktop/result/']
     if args is None:
         args = sys.argv[1:]
 
@@ -129,7 +131,9 @@ def process_file(source_dir: str, dest_dir: str, no_check_crc: bool, filename: s
             entity_proto.ParseFromString(record)
             ds_entity = datastore.Entity.FromPb(entity_proto)
             data = {}
+            key = ds_entity.key()
             for name, value in list(ds_entity.items()):
+                # print(name)
                 if isinstance(value, EmbeddedEntity):
                     dt: Dict = {}
                     data[name] = embedded_entity_to_dict(value, dt)
