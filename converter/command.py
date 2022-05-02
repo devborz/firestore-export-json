@@ -21,7 +21,7 @@ num_files_processed: Value = Value("i", 0)
 
 def main(args=None):
     args = ['/Users/usmanturkaev/Desktop/from/2022-05-01T04:58:27_86653/all_namespaces/all_kinds/',
-            '/Users/usmanturkaev/Desktop/result/']
+            '/Users/usmanturkaev/Desktop/result2/']
     if args is None:
         args = sys.argv[1:]
 
@@ -143,8 +143,9 @@ def process_file(source_dir: str, dest_dir: str, no_check_crc: bool, filename: s
             data_dict = get_dest_dict(ds_entity.key(), json_tree)
             data_dict.update(data)
 
-    out_file_path = os.path.join(dest_dir, filename + ".json")
+    out_file_path = os.path.join(dest_dir, filename + f"_keysCount={len(json_tree)}.json")
     with open(out_file_path, "w", encoding="utf8") as out:
+        print(len(json_tree.keys()))
         out.write(
             json.dumps(json_tree, default=serialize_json, ensure_ascii=False, indent=2)
         )
